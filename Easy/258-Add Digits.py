@@ -1,18 +1,12 @@
 class Solution:
     def addDigits(self, num: int) -> int:
-        if num <= 9:
-            return num
-        num_list = list(str(num))
-        max_run_time = len(num_list) * 2
-        result = 0
-        for i in range(max_run_time):
-            if result >= 10 or i == 0:
-                result = sum(map(int, num_list))
-                num_list = list(str(result))
+        if num == 0:
+            return 0
+        else:
+            if num % 9 == 0:
+                return 9
             else:
-                break
-
-        return result
+                return num % 9
 
 
 testC = Solution()
