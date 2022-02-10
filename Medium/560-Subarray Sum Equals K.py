@@ -1,17 +1,17 @@
 class Solution:
     def subarraySum(self, nums: list[int], k: int) -> int:
         result = 0
-        temp = 0
-        nums_len = len(nums)
-        for i, _ in enumerate(nums):
-            n = 1
-            while i+n <= nums_len:
-                temp += nums[i+n-1]
-                n += 1
-                if temp == k:
-                    result += 1
-                    continue
-            temp = 0
+        curSum = 0
+        hm = dict()
+        hm[0] = 1
+        for i in nums:
+            curSum += i
+            if curSum - k in hm:
+                result += hm[curSum - k]
+            if curSum not in hm:
+                hm[curSum] = 1
+            else:
+                hm[curSum] += 1
 
         return result
 
