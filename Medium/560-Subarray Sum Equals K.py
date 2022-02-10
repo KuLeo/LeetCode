@@ -1,17 +1,16 @@
+from collections import defaultdict
+
+
 class Solution:
     def subarraySum(self, nums: list[int], k: int) -> int:
         result = 0
         curSum = 0
-        hm = dict()
+        hm = defaultdict(int)
         hm[0] = 1
         for i in nums:
             curSum += i
-            if curSum - k in hm:
-                result += hm[curSum - k]
-            if curSum not in hm:
-                hm[curSum] = 1
-            else:
-                hm[curSum] += 1
+            result += hm.get(curSum - k, 0)
+            hm[curSum] = hm.get(curSum, 0) + 1
 
         return result
 
