@@ -1,16 +1,24 @@
+import collections
+
+
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        s2_word = list(s2)
-        for i, _ in enumerate(s2_word):
-            s1_word = list(s1)
-            for w2 in s2_word[i:]:
-                if w2 in s1_word:
-                    s1_word.remove(w2)
-                    if len(s1_word) == 0:
-                        return True
-                else:
-                    break
-
+        if len(s2) < len(s1):
+            return False
+        s1_c = collections.Counter(s1)
+        s1_l = len(s1)
+        head = 0
+        tail = s1_l - 1
+        s2_c = collections.Counter(s2[head:tail])
+        while tail < len(s2):
+            s2_c[s2[tail]] += 1
+            if s2_c == s1_c:
+                return True
+            s2_c[s2[head]] -= 1
+            if s2_c[s2[head]] == 0:
+                del s2_c[s2[head]]
+            head += 1
+            tail += 1
         return False
 
 
