@@ -1,13 +1,12 @@
-import collections
-
-
 class Solution:
     def singleNumber(self, nums: list[int]) -> int:
         summary = dict()
         for i in nums:
-            summary[i] = summary.get(i, 0) + 1
-        minimum = min(summary, key=summary.get)
-        return minimum
+            if i in summary:
+                del summary[i]
+            else:
+                summary[i] = i
+        return next(iter(summary))
 
 
 testC = Solution()
