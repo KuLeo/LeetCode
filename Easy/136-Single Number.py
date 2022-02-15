@@ -3,7 +3,9 @@ import collections
 
 class Solution:
     def singleNumber(self, nums: list[int]) -> int:
-        summary = collections.Counter(nums)
+        summary = dict()
+        for i in nums:
+            summary[i] = summary.get(i, 0) + 1
         minimum = min(summary, key=summary.get)
         return minimum
 
